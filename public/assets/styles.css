@@ -97,6 +97,10 @@ pre {
     font-size: 25px;
 }
 
+.image {
+    padding-left: 50px;
+}
+
 .larticle-card {
     border: 1px solid var(--border);
     padding: 8px;

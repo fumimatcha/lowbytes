@@ -1,0 +1,47 @@
+---
+import Base from "../../layouts/Base.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import { getCollection, getEntry, render } from "astro:content";
+
+// Genera todas las rutas estáticas /blog/<slug>
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post: { slug: string }) => ({ params: { slug: post.slug } }));
+}
+
+const { slug } = Astro.params;
+const entry = await getEntry("blog", slug);
+
+if (!entry) {
+  Astro.response.status = 404;
+}
+
+const { Content } = entry ? await render(entry) : { Content: () => null };
+const { title, description, date, tags } = entry?.data ?? {};
+---
+
+<Base title={title ?? "Artículo no encontrado"} description={description ?? ""}>
+  <SiteHeader />
+  <main class="container">
+    {entry ? (
+      <article class="prose">
+        <header class="mb-6">
+          <h1>{title}</h1>
+          {description && <p class="lead">{description}</p>}
+          <small>{date?.toLocaleDateString?.() ?? ""}{tags?.length ? <> · {tags.join(", ")}</> : null}</small>
+          <hr />
+        </header>
+        <Content />
+        <footer class="mt-10">
+          <hr />
+          <nav class="mt-4"><a href="/blog/">← Volver al índice del blog</a></nav>
+        </footer>
+      </article>
+    ) : (
+      <article class="prose">
+        <h1>Artículo no encontrado</h1>
+        <p><a href="/blog/">← Volver al índice del blog</a></p>
+      </article>
+    )}
+  </main>
+</Base>

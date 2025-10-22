@@ -1,11 +1,66 @@
 ---
 import Base from "../layouts/Base.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import { getEntry } from "astro:content";
+
+// ✅ Editá esta lista con las entradas que querés destacar
+const featuredSlugs = [
+  "arch",          // <- viene de src/content/blog/arch.md
+  // "otra-entrada",
+  // "tercera-entrada",
+];
+
+// Cargamos solo las que existan y ordenamos por fecha desc
+const featured = (
+  await Promise.all(
+    featuredSlugs.map(async (slug) => {
+      try { return await getEntry("blog", slug); }
+      catch { return null; }
+    }),
+  )
+).filter(Boolean).sort((a, b) => +b!.data.date - +a!.data.date);
 ---
 
-<Base>
-<SiteHeader/>
+<Base title="Blog" description="Últimas entradas y temas del blog">
+  <SiteHeader />
+  <main class="container">
+    <section class="intro">
+      <h1>Blog</h1>
+      <p>
+        Acá voy publicando notas sobre Linux, juegos, dev y más. Abajo tenés una
+        selección de las últimas entradas que recomiendo leer primero y, más abajo,
+        la guía para navegar por temas.
+      </p>
+    </section>
 
+    <section class="featured larticle-card">
+      <h2>Últimas entradas</h2>
+      {featured.length === 0 ? (
+        <p>Todavía no seleccionaste entradas destacadas.</p>
+      ) : (
+        featured.map(({ slug, data }) => (
+          <article class="card">
+            <h3><a href={`/blog/${slug}`}>{data.title}</a></h3>
+            {data.description && <p>{data.description}</p>}
+            <small>
+              {data.date.toLocaleDateString()} · {data.tags?.join(", ")}
+            </small>
+          </article>
+        ))
+      )}
+    </section>
 
-
+    <section class="topics">
+      <h2>Cómo navegar por los blogs</h2>
+      <p>
+        Si preferís explorar por tema, usá estos subíndices. Cada uno reúne
+        artículos relacionados y recomendaciones para empezar:
+      </p>
+      <ul class="topic-links">
+        <li><a href="/blog/archlinux/">Arch Linux</a></li>
+        <li><a href="/blog/gaming/">Gaming</a></li>
+        <!-- sumá más cuando quieras -->
+      </ul>
+    </section>
+  </main>
 </Base>

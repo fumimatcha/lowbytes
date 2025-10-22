@@ -1,0 +1,44 @@
+---
+import Base from "../../../layouts/Base.astro";
+import SiteHeader from "../../../components/SiteHeader.astro";
+import { getCollection } from "astro:content";
+
+// Traemos todos los posts de la colección "blog"
+const posts = await getCollection("blog");
+
+// Filtramos solo los que tengan el tag "archlinux"
+const archPosts = posts
+  .filter((post: { data: { tags: string | string[]; }; }) => post.data.tags?.includes("archlinux"))
+  .sort((a: { data: { date: string | number; }; }, b: { data: { date: string | number; }; }) => +b.data.date - +a.data.date); // opcional: orden por fecha descendente
+---
+
+<Base title="Blog • Arch Linux" description="Entradas relacionadas con Arch Linux">
+  <SiteHeader />
+  <main class="container">
+    <h1>Arch Linux</h1>
+    <p>
+      En esta sección encontrarás artículos sobre instalación, configuración, paquetes y
+      optimización en Arch Linux.
+    </p>
+
+    <section class="larticle-card">
+      {archPosts.length === 0 ? (
+        <p>No hay artículos con el tag <code>#archlinux</code> todavía.</p>
+      ) : (
+        archPosts.map(({ slug, data }: { slug: string; data: any }) => (
+          <article class="card">
+            <h2><a href={`/blog/${slug}`}>{data.title}</a></h2>
+            {data.description && <p>{data.description}</p>}
+            <small>
+              {data.date.toLocaleDateString()} · {data.tags?.join(", ")}
+            </small>
+          </article>
+        ))
+      )}
+    </section>
+
+    <nav class="topic-nav">
+      <a href="/blog/">← Volver al índice del blog</a>
+    </nav>
+  </main>
+</Base>
