@@ -1,0 +1,21 @@
+---
+import { NAV } from "../consts.ts";
+---
+<nav class="site-nav">
+    <ul class="menu">
+        {NAV.map((item) => (
+        <li>[<a href={item.href}>{item.label}</a>]/</li>
+        
+        ))}
+    </ul>
+</nav>
+
+<style>
+.site-nav .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; flex-wrap: wrap;
+}
+.site-nav a { text-decoration: none; }
+</style>

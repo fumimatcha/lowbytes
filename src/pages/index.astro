@@ -1,49 +1,66 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
----
+import Image from "astro/components/Image.astro";
+import Base from "../layouts/Base.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+
+import gifWelcome from "../assets/1755551791786744.gif"
+---
+<Base>
+  <SiteHeader />
+
+  <main class="site-main">
+    <section class="main-card">
+      <h2>hola, bienveni@</h2>
+                <p>
+                    vengo usando linux en mi computadora portatil desde hace ya
+                    1 año, sin embargo, siempre la usé para tareas simples como
+                    ver videos, tomar apuntes, leer documentos, etc.
+                    <br><br>
+                    Recientemente (14/10/2025), windows 10 dejó de recibir
+                    soporte oficial de microsoft y como mi pc principal está
+                    VIEJA, DECRÉPITA y no tengo un mangojojojo, no se banca
+                    windows 11.
+                    Decidí entonces cambiarme a la misma distro de linux que
+                    tengo en mi
+                    laptep (lˈaptɛp) B).
+
+                    El tema es que en mi PC principal, además de las
+                    otras cosas que ya hacia, también juego a los jueguitos,
+                    hablo con amigos, escucho música, edito videos, bla, bla,
+                    bla.
+                    <br><br>
+                    Nunca me habia importado poder hacer esas cosas en la otra
+                    compu así que no tenia mucha idea de como arrancar a
+                    solucionar los diferentes errores que me saltaban, fue acá
+                    que me di cuenta de las miles de cosasa que todavia me
+                    faltan aprender.
+                    <br><br>
+                    Entonces decidí hacer esto! para ir guardando las cosas que
+                    voy viendo y no solo tenerlas para poder consultarlas yo
+                    cuando me olvido algun comando o algo, sino que también para
+                    compartirlas con otras personas que capaz estan en la misma
+                    o les llama la atención el tema :D
+                    <br><br>
+                    Así que nada, gracias por leer y espero que al menos algo
+                    sirva de lo que escribo acá, un saludo!
+                </p>
+
+                <Image src={gifWelcome} alt=""/>
+    </section>
+
+    <section class="main-card">
+      <h2>ultimos posts</h2>
+      <!-- placeholder de artículos -->
+      <article class="larticle-card">
+        <h3><a href="/archlinux/wifi-latencia">Optimizar Wi-Fi en Arch</a></h3>
+        <p class="muted">Notas rápidas para mejorar latencia en juegos.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <hr />
+    <p>Hecho con HTML + CSS mínimo. Estética web 90s, bordes rectos, sin sombras.</p>
+  </footer>
+</Base>

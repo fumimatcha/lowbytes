@@ -1,5 +1,8 @@
-// Place any global data in this file.
-// You can import this data from anywhere in your site by using the `import` keyword.
-
-export const SITE_TITLE = 'Astro Blog';
-export const SITE_DESCRIPTION = 'Welcome to my website!';
+export const SITE_TITLE = "Lowbytes";
+export const SITE_SUBTITLE = "investigando la compu";
+export const SITE_DESC = "Notas y enlaces en estética web 90s.";
+export const NAV = [
+    { href: "/", label: "inicio" },
+    { href: "/blog", label: "blog" },
+    { href: "/contacto", label: "contacto" },
+];

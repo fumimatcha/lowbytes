@@ -1,0 +1,18 @@
+---
+import { SITE_TITLE, SITE_DESC } from "../consts.ts";
+const { title = SITE_TITLE, description = SITE_DESC } = Astro.props;
+---
+<!doctype html>
+<html lang="es" data-theme="auto">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="icon" href="/favicon.svg" />
+        <link rel="stylesheet" href="/assets/styles.css" />
+    </head>
+    <body>
+    <slot />
+    </body>
+</html>
