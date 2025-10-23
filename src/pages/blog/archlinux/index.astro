@@ -3,10 +3,8 @@ import Base from "../../../layouts/Base.astro";
 import SiteHeader from "../../../components/SiteHeader.astro";
 import { getCollection } from "astro:content";
 
-// Traemos todos los posts de la colección "blog"
 const posts = await getCollection("blog");
 
-// Filtramos solo los que tengan el tag "archlinux"
 const archPosts = posts
   .filter((post: { data: { tags: string | string[]; }; }) => post.data.tags?.includes("archlinux"))
   .sort((a: { data: { date: string | number; }; }, b: { data: { date: string | number; }; }) => +b.data.date - +a.data.date); // opcional: orden por fecha descendente

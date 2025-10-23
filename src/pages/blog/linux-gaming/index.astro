@@ -1,0 +1,89 @@
+---
+import Base from "../../../layouts/Base.astro";
+import SiteHeader from "../../../components/SiteHeader.astro";
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";  
+
+
+
+
+const posts = await getCollection("blog");
+
+const gamingPosts = posts
+  .filter((post: { data: { tags: string | string[]; }; }) => post.data.tags?.includes("gaming"))
+  .sort((a: { data: { date: string | number; }; }, b: { data: { date: string | number; }; }) => +b.data.date - +a.data.date); // opcional: orden por fecha descendente
+---
+
+<Base title="blog • jueguitos" description="entradas sobre juegos en linux y como configurarlos">
+  <SiteHeader />
+  <main>
+  <section class="main-card">
+    <h2>jueguitos en linux</h2>
+    <p>
+      En esta sección encontrarás artículos sobre instalación, configuración, paquetes y
+      optimización en Arch Linux.
+    </p>
+    <nav class="topic-nav">
+      <a href="/blog/">← volver al blog</a>
+    </nav>
+  </section>
+      <section class="main-card">
+    <section class="main-card">
+  <h2>buscar en esta categoría:</h2>
+  <input
+    type="text"
+    id="search-input"
+    placeholder="buscar..."
+    class="search-input"
+  />
+</section>
+      <h2>entradas: </h2>
+      {gamingPosts.length === 0 ? (
+        <p>no existen articulos</p>
+      ) : (
+        gamingPosts.map(({ slug, data }: { slug: string; data: any }) => (
+          <article class="larticle-card">
+            <a class="card-inner" href={`/blog/${slug}`}>
+              <div class="meta">
+                <h2>{data.title}</h2>
+                {data.description && <p>{data.description}</p>}
+                <small>
+                  {(data.date instanceof Date ? data.date : new Date(data.date)).toLocaleDateString()} · {data.tags?.join(", ")}
+                </small>
+              </div>
+
+              {data.cover && 
+              <img 
+                  src={data.cover.src} 
+                  alt={data.cover.alt} 
+                  class="thumb-img" 
+                  loading="lazy" 
+                  decoding="async" />}
+            </a>
+          </article>
+        ))
+      )}
+    </section>
+    
+<script>
+  const input = document.getElementById("search-input");
+  const articles = Array.from(document.querySelectorAll(".larticle-card"));
+
+  if (input) {
+    input.addEventListener("input", (e) => {
+    const target = e.target as HTMLInputElement;
+    const query = target.value.toLowerCase();
+    articles.forEach((article) => {
+      const el = article as HTMLElement;
+      const text = (el.textContent || "").toLowerCase();
+      el.style.display = text.includes(query) ? "" : "none";
+    });
+  });}
+</script>
+
+    </main>
+    <footer class="site-footer">
+    <hr />
+    <p>gracias por visitar - fumi ❤️</p>
+  </footer>
+</Base>
