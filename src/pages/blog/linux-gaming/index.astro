@@ -11,7 +11,14 @@ const posts = await getCollection("blog");
 
 const gamingPosts = posts
   .filter((post: { data: { tags: string | string[]; }; }) => post.data.tags?.includes("gaming"))
-  .sort((a: { data: { date: string | number; }; }, b: { data: { date: string | number; }; }) => +b.data.date - +a.data.date); // opcional: orden por fecha descendente
+  .sort((a: { data: { date: string | number; }; }, b: { data: { date: string | number; }; }) => +b.data.date - +a.data.date);
+
+
+function formatDate(dateLike: string) {
+  if (typeof dateLike === "string") return dateLike;
+  return new Date(dateLike).toISOString().slice(0, 10); // => "2025-10-23"
+}
+
 ---
 
 <Base title="blog • jueguitos" description="entradas sobre juegos en linux y como configurarlos">
@@ -48,7 +55,7 @@ const gamingPosts = posts
                 <h2>{data.title}</h2>
                 {data.description && <p>{data.description}</p>}
                 <small>
-                  {(data.date instanceof Date ? data.date : new Date(data.date)).toLocaleDateString()} · {data.tags?.join(", ")}
+                  {formatDate(data.date)} · {data.tags?.join(", ")}
                 </small>
               </div>
 
@@ -63,7 +70,7 @@ const gamingPosts = posts
           </article>
         ))
       )}
-    </section>
+</section>
     
 <script>
   const input = document.getElementById("search-input");
@@ -80,7 +87,6 @@ const gamingPosts = posts
     });
   });}
 </script>
-
     </main>
     <footer class="site-footer">
     <hr />

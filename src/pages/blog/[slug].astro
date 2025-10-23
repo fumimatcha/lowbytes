@@ -20,15 +20,17 @@ const { Content } = entry ? await render(entry) : { Content: () => null };
 const { title, description, date, tags } = entry?.data ?? {};
 ---
 
-<Base title={title ?? "Artículo no encontrado"} description={description ?? ""}>
+<Base title={title ?? "artículo no encontrado"} description={description ?? ""}>
   <SiteHeader />
   <main class="container">
     {entry ? (
       <article class="prose">
-        <header class="mb-6">
+        <header>
           <h1>{title}</h1>
           {description && <p class="lead">{description}</p>}
-          <small>{date?.toLocaleDateString?.() ?? ""}{tags?.length ? <> · {tags.join(", ")}</> : null}</small>
+          <small>
+          {date}
+          {tags?.length ? <> · {tags.join(", ")}</> : null}</small>
           <hr />
         </header>
         <Content />
