@@ -2,12 +2,12 @@
 import Base from "../layouts/Base.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { getEntry } from "astro:content";
+import Image from "astro/components/Image.astro";
+import entradas from "../assets/oa2nrvrtqbnb1.jpg"
 
-// ✅ Editá esta lista con las entradas que querés destacar
+
 const featuredSlugs = [
-  "arch",          // <- viene de src/content/blog/arch.md
-  // "otra-entrada",
-  // "tercera-entrada",
+  "test",
 ];
 
 // Cargamos solo las que existan y ordenamos por fecha desc
@@ -23,46 +23,28 @@ const featured = (
 
 <Base title="Blog" description="Últimas entradas y temas del blog">
   <SiteHeader />
-  <main class="site-main">
+  <main class="">
     <section class="main-card">
-      <h1>blog</h1>
+      <h2>blog</h2>
       <p>
         acá se van a publicar entradas y tutoriales sobre varios temas.
-        <br><br>
+        <br>
         los posts están organizados por tags y el menú de abajo funciona
         una especie de indice para ir checkeando los posts por temas especificos.
         <br>
         no sé si es la forma más optima de organizar estas cosas, pero fue lo que se me ocurrió, 
         ante cualquier sugerencia por favor referirse a la página de <a href="/contacto">contacto</a> XD un saludo!
-        
+        </p>
         
     </section>
     <section class="main-card">
       <ul class="topic-links">
-        <li><a href="/blog/archlinux/">arch linux</a></li>
-        <li>linux en general</li>
-        <li><a href="/blog/gaming/">jueguitos en linux</a></li>
-        <li>cosas</li>
+        <li><a href="/blog/linux-gaming/">jueguitos-en-linux</a></li>
       </ul>
     </section>
-
-    <section class="main-card">
-      <h2>Últimas entradas</h2>
-      {featured.length === 0 ? (
-        <p>Todavía no seleccionaste entradas destacadas.</p>
-      ) : (
-        featured.map(({ slug, data }) => (
-          <article class="card">
-            <h3><a href={`/blog/${slug}`}>{data.title}</a></h3>
-            {data.description && <p>{data.description}</p>}
-            <small>
-              {data.date.toLocaleDateString()} · {data.tags?.join(", ")}
-            </small>
-          </article>
-        ))
-      )}
-    </section>
-
-    
   </main>
+  <footer class="site-footer">
+    <hr />
+    <p>gracias por visitar - fumi ❤️</p>
+  </footer>
 </Base>

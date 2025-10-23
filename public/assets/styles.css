@@ -3,6 +3,7 @@ html,
 body {
     margin: 20px;
     padding: 0;
+    font-size: 16px;
 }
 
 :root {
@@ -25,24 +26,6 @@ body {
     }
 }
 
-html[data-theme="light"] {
-    --bg: #ffffff;
-    --fg: #000000;
-    --muted: #444444;
-    --link: #0000ee;
-    --border: #cccccc;
-    --card: #f5f5f5;
-}
-
-html[data-theme="dark"] {
-    --bg: #0b0f14;
-    --fg: #e6e6e6;
-    --muted: #a0a0a0;
-    --link: #8ab4f8;
-    --visited: #c58af8;
-    --border: #39424b;
-    --card: #11161c;
-}
 
 body {
     background: var(--bg);
@@ -56,6 +39,13 @@ body {
 a {
     color: var(--link);
     text-decoration: none;
+}
+
+p,
+h1,
+h2,
+h3 {
+    margin: 0;
 }
 
 code,
@@ -86,33 +76,52 @@ pre {
 }
 
 .main-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
     border: 1px solid var(--border);
     background: var(--card);
     padding: 8px;
     margin: 8px 0;
+
 }
 
-.main-card h3,
-h2,
-h1 {
-    margin: 0 0 6px;
-    font-size: 25px;
+
+
+.main-card .highlight {
+    padding: 1px;
+    background-color: var(--border);
+}
+
+.main-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .larticle-card {
     border: 1px solid var(--border);
     padding: 8px;
+
 }
 
-.larticle-card h1,
-h2,
-h3 {
-    margin: 0 0 0;
-    font-size: 20px;
+.card-inner {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 1rem;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
 }
 
-.larticle-card p {
-    margin: 0 0 0;
+.thumb-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
 }
 
 .topic-links {
@@ -138,4 +147,34 @@ h3 {
 .site-footer {
     color: var(--muted);
     font-size: 13px;
+}
+
+/* BLOG page */
+
+.entradas-image {
+    display: block;
+    max-width: 15%;
+    height: auto;
+    margin-right: auto;
+}
+
+.container {
+    padding-bottom: 8px;
+
+}
+
+.search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 6px 10px;
+    margin: 0.5rem 0 1rem;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background: #111;
+    color: #fff;
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: #888;
 }
