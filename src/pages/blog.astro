@@ -23,17 +23,30 @@ const featured = (
 
 <Base title="Blog" description="Últimas entradas y temas del blog">
   <SiteHeader />
-  <main class="container">
-    <section class="intro">
-      <h1>Blog</h1>
+  <main class="site-main">
+    <section class="main-card">
+      <h1>blog</h1>
       <p>
-        Acá voy publicando notas sobre Linux, juegos, dev y más. Abajo tenés una
-        selección de las últimas entradas que recomiendo leer primero y, más abajo,
-        la guía para navegar por temas.
-      </p>
+        acá se van a publicar entradas y tutoriales sobre varios temas.
+        <br><br>
+        los posts están organizados por tags y el menú de abajo funciona
+        una especie de indice para ir checkeando los posts por temas especificos.
+        <br>
+        no sé si es la forma más optima de organizar estas cosas, pero fue lo que se me ocurrió, 
+        ante cualquier sugerencia por favor referirse a la página de <a href="/contacto">contacto</a> XD un saludo!
+        
+        
+    </section>
+    <section class="main-card">
+      <ul class="topic-links">
+        <li><a href="/blog/archlinux/">arch linux</a></li>
+        <li>linux en general</li>
+        <li><a href="/blog/gaming/">jueguitos en linux</a></li>
+        <li>cosas</li>
+      </ul>
     </section>
 
-    <section class="featured larticle-card">
+    <section class="main-card">
       <h2>Últimas entradas</h2>
       {featured.length === 0 ? (
         <p>Todavía no seleccionaste entradas destacadas.</p>
@@ -50,17 +63,6 @@ const featured = (
       )}
     </section>
 
-    <section class="topics">
-      <h2>Cómo navegar por los blogs</h2>
-      <p>
-        Si preferís explorar por tema, usá estos subíndices. Cada uno reúne
-        artículos relacionados y recomendaciones para empezar:
-      </p>
-      <ul class="topic-links">
-        <li><a href="/blog/archlinux/">Arch Linux</a></li>
-        <li><a href="/blog/gaming/">Gaming</a></li>
-        <!-- sumá más cuando quieras -->
-      </ul>
-    </section>
+    
   </main>
 </Base>

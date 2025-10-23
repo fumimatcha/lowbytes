@@ -92,13 +92,11 @@ pre {
     margin: 8px 0;
 }
 
-.main-card h2 {
+.main-card h3,
+h2,
+h1 {
     margin: 0 0 6px;
     font-size: 25px;
-}
-
-.image {
-    padding-left: 50px;
 }
 
 .larticle-card {
@@ -106,14 +104,27 @@ pre {
     padding: 8px;
 }
 
-.larticle-card h3 {
+.larticle-card h1,
+h2,
+h3 {
     margin: 0 0 0;
     font-size: 20px;
 }
 
 .larticle-card p {
     margin: 0 0 0;
+}
 
+.topic-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.topic-links li {
+    margin: 0 10px 0 0;
+    text-decoration: underline;
 }
 
 
@@ -121,7 +132,6 @@ pre {
 
 .articles {
     margin: 0;
-
 }
 
 /* FOOTER */
